@@ -23,7 +23,7 @@ pipeline
         {
             steps 
                 {
-                echo 'Test App'
+                bat 'mvn test'
                 }
 
         }        
