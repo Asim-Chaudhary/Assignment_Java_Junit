@@ -1,6 +1,6 @@
 pipeline 
 {
-    agent { docker {image 'node:16-alpine'}}
+    agent none
 
     tools {
             maven 'Maven_2'
@@ -10,12 +10,15 @@ pipeline
     stages 
     {
         stage('Build') 
-        {
+        {   
+            agent {
+                    docker {image 'openjdk:17-jdk'}
+                }
             steps 
                 {
                     script{ 
                         git branch : 'main', url: 'https://github.com/Asim-Chaudhary/Assignment_Java_Junit.git'
-                        docker.image('openjdk:17-jdk').inside
+                        //docker.image('openjdk:17-jdk').inside
                        { sh 'mvn clean compile' }
                         }
                 
