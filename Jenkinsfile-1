@@ -1,0 +1,40 @@
+pipeline 
+{
+    agent any
+
+    tools {
+            maven 'Maven_2'
+    }
+
+    stages 
+    {
+        stage('Build') 
+        {
+            steps 
+                {
+                    git branch : 'main', url: 'https://github.com/Asim-Chaudhary/Assignment_Java_Junit.git'
+                    sh 'mvn clean compile'
+                
+                }
+
+        }
+
+        stage('Test') 
+        {
+            steps 
+                {
+                sh 'mvn test'
+                }
+
+        }        
+
+        stage('Deploy') 
+        {
+            steps 
+                {
+                echo 'Deploy App'
+                } 
+
+        }               
+    }
+}
