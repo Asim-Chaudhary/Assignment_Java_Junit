@@ -12,8 +12,11 @@ pipeline
         {
             steps 
                 {
-                    git branch : 'main', url: 'https://github.com/Asim-Chaudhary/Assignment_Java_Junit.git'
-                    sh 'mvn clean compile'
+                    script{ 
+                        git branch : 'main', url: 'https://github.com/Asim-Chaudhary/Assignment_Java_Junit.git'
+                        docker.image('openjdk:17-jdk').inside
+                       { sh 'mvn clean compile' }
+                        }
                 
                 }
 
