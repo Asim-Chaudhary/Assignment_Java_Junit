@@ -37,4 +37,11 @@ pipeline
 
         }               
     }
+
+    post 
+    {
+            always
+            { emailext body: 'The Pipeline was successful.', subject: 'Pipeline Status', to: 'asimchaudhary1996@gmail.com' }
+    }
 }
+    
