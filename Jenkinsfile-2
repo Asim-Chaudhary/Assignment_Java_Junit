@@ -5,7 +5,7 @@ pipeline
     tools {
             maven 'Maven_2'
             dockerTool 'Docker_1'
-            sonarQubeScanner 'sonar_1'
+            //sonarQubeScanner 'sonar_1'
     }
 
     stages 
