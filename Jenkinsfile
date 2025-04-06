@@ -41,7 +41,7 @@ pipeline
     post 
     {
             always
-            { emailext body: 'The Pipeline was successful.', subject: 'Pipeline Status', to: 'asimchaudhary1996@gmail.com' }
+            { emailext body: 'The Pipeline was successful.', subject: 'Pipeline Status', to: 'asim.chaudhary459@gmail.com' }
     }
 }
     
