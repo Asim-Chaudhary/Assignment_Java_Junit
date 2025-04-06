@@ -1,0 +1,60 @@
+pipeline 
+{
+    agent any
+
+    tools {
+            maven 'Maven_2'
+            dockerTool 'Docker_1'
+    }
+
+    stages 
+    {
+        stage('Build') 
+        {   
+            agent {
+                    docker {image 'maven:3.8.6-eclipse-temurin-17'}
+                }
+            steps 
+                {
+                    script{ 
+                        git branch : 'main', url: 'https://github.com/Asim-Chaudhary/Assignment_Java_Junit.git'
+                        //docker.image('openjdk:17-jdk').inside
+                        sh 'mvn clean compile' 
+                        }
+                
+                }
+
+        }
+
+        stage('Test') 
+        {   
+            agent {
+                    docker {image 'maven:3.8.6-eclipse-temurin-11'}
+                }
+            steps 
+                {
+                    script{ 
+                        git branch : 'main', url: 'https://github.com/Asim-Chaudhary/Assignment_Java_Junit.git'
+                        //docker.image('openjdk:17-jdk').inside
+                        sh 'mvn test' 
+                        }
+                
+                }
+
+        }
+
+        stage('Deploy') 
+        {
+            steps 
+                {
+                echo 'Deploy App'
+                } 
+
+        }               
+    }
+    post 
+    {
+            always
+            { emailext body: 'The Pipeline was successful.', subject: 'Pipeline Status', to: 'asim.chaudhary459@gmail.com' }
+    }
+}
