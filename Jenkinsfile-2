@@ -45,11 +45,14 @@ pipeline
         }
         stage ('Scan')
         {
+            agent {
+                    docker {image 'sonarqube:7.9.6-community'}
+                }
             steps
                     {
                         withSonarQubeEnv(installationName: 'sonar')
                                     {
-                                            sh 'mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.1000:sonar' 
+                                            sh 'mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar' 
                                     }
                     }
         }
