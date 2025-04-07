@@ -2,6 +2,8 @@ pipeline
 {
     agent any
 
+    
+
     tools {
             maven 'Maven_2'
             dockerTool 'Docker_1'
@@ -65,7 +67,29 @@ pipeline
                 echo 'Deploy App'
                 } 
 
-        }               
+        }      
+
+        stage('Check Docker') {
+                                steps {
+                                        sh 'docker --version'
+                                    }
+                            }
+        stage ('Build Docker Image')
+                                    {    
+                                        steps {
+                                                    script { sh 'docker build -t ${DOCKER_IMAGE} .' }
+                                                }
+                                    }
+        stage ('Push to docker hub')
+                                    {
+                                        steps {    
+                                                script {     docker.withRegistry('', 'DockerHub_Token') {
+                                                                                         docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push() 
+                                                                                                                }
+                                                        }
+                                                            
+                                            }
+                                    }
     }
     post 
     {
