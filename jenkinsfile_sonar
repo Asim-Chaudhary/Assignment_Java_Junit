@@ -1,0 +1,33 @@
+pipeline 
+{
+    agent any
+
+    tools {
+            maven 'Maven_2'
+            dockerTool 'Docker_1'
+            //sonarQubeScanner 'sonar_1'
+    }
+
+    stages 
+    {
+        
+
+        
+        stage('Scan') {
+    steps {
+        withSonarQubeEnv('sonar') {
+            sh '''
+                docker run --rm \
+                    --network ci_network \
+                    -v "$PWD":/usr/src \
+                    -w /usr/src \
+                    maven:3.8.6-eclipse-temurin-11 \
+                    mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Dsonar.host.url=http://sonar:9000
+            '''
+        }
+    }
+}
+
+
+    
+}
