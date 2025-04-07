@@ -2,7 +2,11 @@ pipeline
 {
     agent any
 
-    
+    environment     
+            {
+                DOCKER_IMAGE = "asimchaudhary/assignment_java_junit"
+                DOCKER_TAG = "latest"
+            }
 
     tools {
             maven 'Maven_2'
