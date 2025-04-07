@@ -17,6 +17,7 @@ pipeline
                     steps {
                                 withSonarQubeEnv('sonar') {
                                                                 sh '''
+                                                                ls -l
                                                                 docker run --rm \
                                                                 --network ci_network \
                                                                 -v "$PWD/Assignment_Java_Junit":/usr/src \
