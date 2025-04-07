@@ -29,9 +29,9 @@ pipeline
 
         stage('Test') 
         {   
-            agent {
-                    docker {image 'maven:3.8.6-eclipse-temurin-11'}
-                }
+            //agent {
+                    //docker {image 'maven:3.8.6-eclipse-temurin-11'}
+                //}
             steps 
                 {
                     script{ 
