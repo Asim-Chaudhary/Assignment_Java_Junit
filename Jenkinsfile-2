@@ -49,7 +49,7 @@ pipeline
                     {
                         withSonarQubeEnv(installationName: 'sonar')
                                     {
-                                            sh 'mvn clean install sonar : sonar' 
+                                            sh 'mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar' 
                                     }
                     }
         }
