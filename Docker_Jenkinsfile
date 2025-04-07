@@ -3,9 +3,27 @@ pipeline {
 
     stages {
         stage('Check Docker') {
-            steps {
-                sh 'docker --version'
+                                steps {
+                                        sh 'docker --version'
+                                    }
+                            }
+        stage ('Build Docker Image')
+                                    {    
+                                        steps {
+                                                    script { docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}") }
+                                                }
+                                    }
+        stage ('Push to docker hub')
+                                    {
+                                        steps {    
+                                                script {     docker.withRegistry('', 'dockerhub-credentials') {
+                                                                                         docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push() 
+                                                                                                                }
+                                                        }
+                                                            
+                                            }
+                                    }
             }
-        }
+
     }
-}
+
